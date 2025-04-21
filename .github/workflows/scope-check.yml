@@ -2,7 +2,7 @@ name: Bounty Scope Checker
 
 on:
   schedule:
-    - cron: "0 12 * * *" # هر روز ساعت 12 UTC
+    - cron: "0 12 * * *" # اجرا هر روز ساعت ۱۲ UTC
   workflow_dispatch: # اجازه اجرای دستی
 
 jobs:
