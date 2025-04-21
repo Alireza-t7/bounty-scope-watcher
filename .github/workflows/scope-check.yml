@@ -2,8 +2,8 @@ name: Bounty Scope Checker
 
 on:
   schedule:
-    - cron: "0 12 * * *"
-  workflow_dispatch:
+    - cron: "0 12 * * *" # هر روز ساعت 12 UTC
+  workflow_dispatch: # اجازه اجرای دستی
 
 jobs:
   check-scope:
@@ -26,14 +26,13 @@ jobs:
         run: |
           python Whaching.py
 
-          - name: Commit & push if changes
-          run: |
-            git config user.name "GitHub Action"
-            git config user.email "action@github.com"
-            if ls *.json 1> /dev/null 2>&1; then
-              git add *.json
-              git commit -m "🔄 Update scope data"
-              git push
-            else
-              echo "ℹ️ No JSON files to commit. Skipping push."
-            fi
+      - name: Commit & push if changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          if ls *.json 1> /dev/null 2>&1; then
+            git add *.json
+            git commit -m "🔄 Update scope data"
+            git push
+          else
+            echo "ℹ️ No JSON files to commit. Skipping push."

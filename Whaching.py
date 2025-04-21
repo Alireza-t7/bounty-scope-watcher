@@ -1,32 +1,48 @@
-import cloudscraper
+چimport requests
 import json
-from bs4 import BeautifulSoup
 
 PROGRAM_SLUG = "koho"
-URL = f"https://hackerone.com/{PROGRAM_SLUG}"
-FILENAME = f"{PROGRAM_SLUG}_scope.json"
+API_URL = f"https://hackerone.com/graphql"
 
-scraper = cloudscraper.create_scraper()
-res = scraper.get(URL)
+HEADERS = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Referer": f"https://hackerone.com/{PROGRAM_SLUG}",
+    "User-Agent": "Mozilla/5.0"
+}
 
-if res.status_code != 200:
-    print("❌ Failed to load page")
+QUERY = {
+    "operationName": "TeamStructuredScopes",
+    "variables": {"handle": PROGRAM_SLUG},
+    "query": """
+      query TeamStructuredScopes($handle: String!) {
+        team(handle: $handle) {
+          structured_scopes {
+            asset_identifier
+            asset_type
+            eligible_for_submission
+            instruction
+          }
+        }
+      }
+    """
+}
+
+response = requests.post(API_URL, headers=HEADERS, json=QUERY)
+
+if response.status_code != 200:
+    print("❌ Failed to fetch data from HackerOne API")
     exit()
 
-soup = BeautifulSoup(res.text, "html.parser")
-script_tag = soup.find("script", {"id": "__NEXT_DATA__"})
+data = response.json()
 
-if not script_tag:
-    print("❌ Couldn't find JSON in page")
-    exit()
-
-data = json.loads(script_tag.string)
 try:
-    scopes = data["props"]["pageProps"]["hacktivityProgram"]["structured_scopes"]
-except KeyError:
-    print("❌ No structured_scopes found")
+    scopes = data["data"]["team"]["structured_scopes"]
+except (KeyError, TypeError):
+    print("❌ Could not extract scopes from response")
     exit()
 
-print(f"✅ Found {len(scopes)} scopes")
-with open(FILENAME, "w") as f:
+print(f"✅ Found {len(scopes)} scopes for {PROGRAM_SLUG}")
+
+with open(f"{PROGRAM_SLUG}_scope.json", "w") as f:
     json.dump(scopes, f, indent=2)
