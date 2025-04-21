@@ -1,9 +1,10 @@
 name: Bounty Scope Checker
 
 on:
+  push: # اجرای فوری وقتی کد آپلود می‌کنی
   schedule:
-    - cron: "0 12 * * *" # اجرا هر روز ساعت ۱۲ UTC
-  workflow_dispatch: # اجازه اجرای دستی
+    - cron: "*/15 * * * *" # اجرای هر ۱۵ دقیقه
+  workflow_dispatch: # امکان اجرای دستی
 
 jobs:
   check-scope:
