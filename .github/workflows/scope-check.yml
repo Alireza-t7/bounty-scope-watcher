@@ -35,5 +35,4 @@ jobs:
             git commit -m "🔄 Update scope data"
             git push
           else
-            echo "No JSON files to commit."
-          fi
+            echo "❌ No scope JSON generated."

@@ -3,7 +3,7 @@ import json
 import os
 from bs4 import BeautifulSoup
 
-PROGRAM_SLUG = "gitlab"
+PROGRAM_SLUG = "koho"
 PROGRAM_URL = f"https://hackerone.com/{PROGRAM_SLUG}"
 JSON_FILE = f"{PROGRAM_SLUG}_scope.json"
 
