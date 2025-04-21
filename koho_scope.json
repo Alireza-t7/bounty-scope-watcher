@@ -1,0 +1,92 @@
+[
+  {
+    "asset_identifier": "web.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": true,
+    "instruction": "Customer-facing Web application"
+  },
+  {
+    "asset_identifier": "http://api.koho.ca/1.0",
+    "asset_type": "URL",
+    "eligible_for_submission": true,
+    "instruction": "Our main API gateway"
+  },
+  {
+    "asset_identifier": "http://api.koho.ca/partner",
+    "asset_type": "URL",
+    "eligible_for_submission": true,
+    "instruction": "Used for API calls to/for our partners"
+  },
+  {
+    "asset_identifier": "app.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": true,
+    "instruction": "Our app API gateway."
+  },
+  {
+    "asset_identifier": "webgateway.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": true,
+    "instruction": "Our web API gateway."
+  },
+  {
+    "asset_identifier": "www.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": true,
+    "instruction": "Marketing website"
+  },
+  {
+    "asset_identifier": "usercontent.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": true,
+    "instruction": "Used for our assets to be delivered to customers (i.e. logo, stylesheets, etc.)."
+  },
+  {
+    "asset_identifier": "ca.koho",
+    "asset_type": "GOOGLE_PLAY_APP_ID",
+    "eligible_for_submission": true,
+    "instruction": "Android Mobile app"
+  },
+  {
+    "asset_identifier": "1091010942",
+    "asset_type": "APPLE_STORE_APP_ID",
+    "eligible_for_submission": true,
+    "instruction": "iOS Mobile app"
+  },
+  {
+    "asset_identifier": "*.koho.ca/cdn-cgi",
+    "asset_type": "WILDCARD",
+    "eligible_for_submission": false,
+    "instruction": ""
+  },
+  {
+    "asset_identifier": "admin.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": false,
+    "instruction": "Out of scope"
+  },
+  {
+    "asset_identifier": "shiny-admin.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": false,
+    "instruction": "Out of scope"
+  },
+  {
+    "asset_identifier": "ktools.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": false,
+    "instruction": "Out of scope"
+  },
+  {
+    "asset_identifier": "tampuli.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": false,
+    "instruction": "Out of scope"
+  },
+  {
+    "asset_identifier": "curaca.koho.ca",
+    "asset_type": "URL",
+    "eligible_for_submission": false,
+    "instruction": "Out of scope"
+  }
+]
