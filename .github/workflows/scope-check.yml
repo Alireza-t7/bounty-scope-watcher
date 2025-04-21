@@ -3,7 +3,7 @@ name: Bounty Scope Checker
 on:
   push:                         # اجرا هنگام push
   schedule:
-    - cron: "*/15 * * * *"      # هر ۱۵ دقیقه یک‌بار
+    - cron: "*/100000 * * * *"      # هر ۱۵ دقیقه یک‌بار
   workflow_dispatch:            # اجرای دستی از GitHub
 
 jobs:
