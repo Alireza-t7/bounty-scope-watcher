@@ -1,4 +1,4 @@
-چimport requests
+import requests
 import json
 
 PROGRAM_SLUG = "koho"
