@@ -2,8 +2,8 @@ import requests
 import json
 
 PROGRAM_SLUG = "koho"
-API_URL = f"https://hackerone.com/graphql"
 
+API_URL = "https://hackerone.com/graphql"
 HEADERS = {
     "Content-Type": "application/json",
     "Accept": "application/json",
@@ -18,31 +18,53 @@ QUERY = {
       query TeamStructuredScopes($handle: String!) {
         team(handle: $handle) {
           structured_scopes {
-            asset_identifier
-            asset_type
-            eligible_for_submission
-            instruction
+            edges {
+              node {
+                asset_identifier
+                asset_type
+                eligible_for_submission
+                instruction
+              }
+            }
           }
         }
       }
     """
 }
 
-response = requests.post(API_URL, headers=HEADERS, json=QUERY)
+print(f"🌐 Fetching: https://hackerone.com/{PROGRAM_SLUG}")
+
+try:
+    response = requests.post(API_URL, headers=HEADERS, json=QUERY)
+except Exception as e:
+    print(f"❌ Request failed: {e}")
+    exit()
 
 if response.status_code != 200:
-    print("❌ Failed to fetch data from HackerOne API")
+    print(f"❌ Failed to fetch data: {response.status_code}")
+    with open("debug_response.json", "w") as f:
+        f.write(response.text)
     exit()
 
 data = response.json()
+with open("debug_response.json", "w") as f:
+    json.dump(data, f, indent=2)
 
+# استخراج scopes
 try:
-    scopes = data["data"]["team"]["structured_scopes"]
+    edges = data["data"]["team"]["structured_scopes"]["edges"]
+    scopes = [edge["node"] for edge in edges]
 except (KeyError, TypeError):
     print("❌ Could not extract scopes from response")
     exit()
 
-print(f"✅ Found {len(scopes)} scopes for {PROGRAM_SLUG}")
+if not scopes:
+    print("⚠️ No scopes found.")
+    exit()
 
-with open(f"{PROGRAM_SLUG}_scope.json", "w") as f:
+# ذخیره فایل JSON
+filename = f"{PROGRAM_SLUG}_scope.json"
+with open(filename, "w") as f:
     json.dump(scopes, f, indent=2)
+
+print(f"✅ Saved {len(scopes)} scopes to {filename}")

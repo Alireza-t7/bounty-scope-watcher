@@ -1,10 +1,10 @@
 name: Bounty Scope Checker
 
 on:
-  push: # اجرا هنگام push
+  push:
   schedule:
-    - cron: "*/15 * * * *" # هر ۱۵ دقیقه یک‌بار
-  workflow_dispatch: # اجرای دستی از GitHub
+    - cron: "*/15 * * * *" # هر 15 دقیقه
+  workflow_dispatch: # اجرا دستی
 
 jobs:
   check-scope:
@@ -33,7 +33,7 @@ jobs:
           git config user.email "action@github.com"
           if ls *.json 1> /dev/null 2>&1; then
             git add *.json
-            git commit -m "🔄 Update scope data"
+            git commit -m "🔄 Update scope data" || echo "No changes to commit"
             git push
           else
             echo "📭 No JSON files to commit"
